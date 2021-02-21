@@ -13,3 +13,5 @@
 
 
 电脑端地址：[点我](https://github.com/red-fox-yj/AI-coach-Server)
+
+原始效果视频链接：[点我](https://www.bilibili.com/video/BV1Bt4y1S7aL/)
