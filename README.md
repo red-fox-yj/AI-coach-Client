@@ -12,4 +12,4 @@
 
 
 
-电脑端地址：点我
+电脑端地址：[点我](https://github.com/red-fox-yj/AI-coach-Server)
