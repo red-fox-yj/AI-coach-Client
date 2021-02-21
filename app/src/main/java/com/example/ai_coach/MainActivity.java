@@ -1,9 +1,14 @@
 package com.example.ai_coach;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -15,6 +20,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private NbButton button;
@@ -47,6 +54,29 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * 获取用户权限
+     */
+    private void permissionRequest() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
+            String[] permissions = new String[]{Manifest.permission.BLUETOOTH,Manifest.permission.BLUETOOTH_ADMIN,Manifest.permission.CAMERA,Manifest.permission.RECORD_AUDIO,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+            List<String> mPermissionList = new ArrayList<>();
+            for (int i = 0; i < permissions.length; i++) {
+                if (ContextCompat.checkSelfPermission(MainActivity.this, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
+                    mPermissionList.add(permissions[i]);
+                }
+            }
+
+            if (mPermissionList.isEmpty()) {// 全部允许
+                System.out.println("Caputre获取到所有权限");
+            } else {//存在未允许的权限
+                String[] mPermissions = mPermissionList.toArray(new String[mPermissionList.size()]);
+                ActivityCompat.requestPermissions(MainActivity.this, mPermissions, 1001);
+            }
+        }
     }
 
     private void gotoNew() {
@@ -99,24 +129,5 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-
-
-//    public void function01(View v){
-//        Intent newIntent = new Intent();//新建一个Intent对象
-//        //选择当前Activity和下一个要运行的Activity
-//        newIntent.setClass(MainActivity.this, camera.class);
-//        newIntent.putExtra("com.examples.helicopter.age", 20);//传递数据
-//        newIntent.putExtra("com.examples.helicopter.name", "12345678");//传递数据
-//        startActivity(newIntent);//启动Intent对象
-//    }
-//
-//    public void function02(View v){
-//        Intent newIntent = new Intent();//新建一个Intent对象
-//        //选择当前Activity和下一个要运行的Activity
-//        newIntent.setClass(MainActivity.this, ChooseActivity.class);
-//        newIntent.putExtra("model", "model_1");//传递数据
-//        //newIntent.putExtra("com.examples.helicopter.name", "12345678");//传递数据x
-//        startActivity(newIntent);//启动Intent对象
-//    }
 
 

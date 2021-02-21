@@ -38,7 +38,6 @@ public class IM_lookActivity extends AppCompatActivity implements View.OnClickLi
         System.out.println("image_look");
         this.images = initData();    //获取本地图片集合
         System.out.println("image_look0000");
-
         init();
         System.out.println("image_look1111");
     }
@@ -94,7 +93,8 @@ public class IM_lookActivity extends AppCompatActivity implements View.OnClickLi
         System.out.println(url);
         File albumdir = new File(url);
         File[] imgfile = albumdir.listFiles(filefiter);
-        int len = imgfile.length;
+        System.out.println(imgfile);
+        int len = imgfile != null ? imgfile.length : 0;
         for(int i=0;i<len;i++){
             mList.add(imgfile[i]);
         }
